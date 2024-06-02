@@ -2,6 +2,7 @@ import React from 'react'
 import { AiOutlineInstagram } from 'react-icons/ai'
 import { FaFacebookF, FaTwitter, FaLinkedin, FaReddit } from 'react-icons/fa'
 import ThemeToggle from './ThemeToggle'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -40,8 +41,11 @@ const Footer = () => {
                                 <input className='bg-primary border border-input p-2 mr-2 w-full
                                 shadow-xl rounded-2xl md:w-auto'
                                  type="email" placeholder='Enter Your Email' />
-                                <button className='bg-button text-btnText p-2 px-4
-                                w-full rounded-2xl shadow-xl hover:shadow-2xl md:w-auto my-2'>Sign Up</button>
+                                <Link to='/signup'
+                                className='bg-button text-btnText cursor-pointer
+                                p-2 px-4 w-full rounded-2xl shadow-xl 
+                                hover:shadow-2xl md:w-auto my-2'>
+                                    Sign Up</Link>
                             </form>
                          </div>
                          <div className='flex py-4 justify-between text-accent'>
