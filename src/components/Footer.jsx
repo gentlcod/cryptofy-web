@@ -12,9 +12,9 @@ const Footer = () => {
                 <div>
                     <h2 className='font-bold mb-7'>Support</h2>
                     <ul>
-                       <a href='https://support.coingecko.com/hc/en-us' target='_blank'><li className='text-sm py-2'>Help Center</li></a>
-                       <a href="https://www.coingecko.com/en/api" target='_blank'> <li className='text-sm py-2'>API Status</li></a>
-                       <a href="https://docs.coingecko.com/reference/introduction" target='_blank'> <li className='text-sm py-2'>Documentation</li></a>
+                       <a href='https://support.coingecko.com/hc/en-us' target='_blank' rel="noopener noreferrer"><li className='text-sm py-2'>Help Center</li></a>
+                       <a href="https://www.coingecko.com/en/api" target='_blank' rel="noopener noreferrer"> <li className='text-sm py-2'>API Status</li></a>
+                       <a href="https://docs.coingecko.com/reference/introduction" target='_blank' rel="noopener noreferrer"> <li className='text-sm py-2'>Documentation</li></a>
                     </ul>
                 </div>
                 <div className='ml-12'>
@@ -45,11 +45,11 @@ const Footer = () => {
                             </form>
                          </div>
                          <div className='flex py-4 justify-between text-accent'>
-                       <a href='https://twitter.com/coingecko' target='_blank'>  <FaTwitter /> </a>
-                       <a href="https://www.linkedin.com/company/coingecko/" target='_blank'>  <FaLinkedin /> </a>
-                       <a href='https://www.facebook.com/coingecko' target='_blank'>  <FaFacebookF /> </a>
-                       <a href="https://www.reddit.com/r/coingecko/" target='_blank'><FaReddit /></a>
-                       <a href='https://www.instagram.com/coingecko/' target='_blank'>  <AiOutlineInstagram/> </a>
+                       <a href='https://twitter.com/coingecko' target='_blank' rel="noopener noreferrer">  <FaTwitter /> </a>
+                       <a href="https://www.linkedin.com/company/coingecko/" target='_blank' rel="noopener noreferrer">  <FaLinkedin /> </a>
+                       <a href='https://www.facebook.com/coingecko' target='_blank' rel="noopener noreferrer">  <FaFacebookF /> </a>
+                       <a href="https://www.reddit.com/r/coingecko/" target='_blank' rel="noopener noreferrer"><FaReddit /></a>
+                       <a href='https://www.instagram.com/coingecko/' target='_blank' rel="noopener noreferrer">  <AiOutlineInstagram/> </a>
                          </div>
                       </div>
                 </div>

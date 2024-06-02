@@ -5,6 +5,7 @@ import {FaTwitter, FaFacebook, FaReddit, FaLinkedin, FaArrowLeft} from 'react-ic
 import DOMPurify from 'dompurify'
 import { useParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 const CoinPage = () => {
 
@@ -157,10 +158,10 @@ const CoinPage = () => {
           </div>
 
           <div className='flex justify-around p-8 text-accent'>
-            <a href="https://twitter.com/coingecko" target='_blank'> <FaTwitter className='cursor-pointer' /></a>
-            <a href="https://www.facebook.com/coingecko" target='_blank'><FaFacebook className='cursor-pointer'/></a>
-            <a href="https://www.reddit.com/r/coingecko/" target='_blank'><FaReddit className='cursor-pointer'/></a>
-            <a href="https://www.linkedin.com/company/coingecko/" target='_blank'><FaLinkedin className='cursor-pointer'/></a>
+            <a href="https://twitter.com/coingecko" target='_blank' rel="noopener noreferrer"> <FaTwitter className='cursor-pointer' /></a>
+            <a href="https://www.facebook.com/coingecko" target='_blank' rel="noopener noreferrer"><FaFacebook className='cursor-pointer'/></a>
+            <a href="https://www.reddit.com/r/coingecko/" target='_blank' rel="noopener noreferrer"><FaReddit className='cursor-pointer'/></a>
+            <a href="https://www.linkedin.com/company/coingecko/" target='_blank' rel="noopener noreferrer"><FaLinkedin className='cursor-pointer'/></a>
           </div>
         </div>
       </div>
@@ -181,6 +182,7 @@ const CoinPage = () => {
   </div>
 }
     </div>
+    <Footer />
     </>
   )
   

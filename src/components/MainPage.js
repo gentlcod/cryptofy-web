@@ -591,9 +591,9 @@ const MainPage = () => {
           <div className='col'>
             <h5 className='bold border-b w-[70px] border-accent'>Support</h5>
             <span className='bar flex flex-col'>
-              <a href='https://t.me/coingecko' target='_blank'>Chat</a>
-              <a href='https://support.coingecko.com/hc/en-us' target='_blank'>Help</a>
-              <a href='https://www.coingecko.com/en/faq' target='_blank'>FAQs</a>
+              <a href='https://t.me/coingecko' target='_blank' rel="noopener noreferrer">Chat</a>
+              <a href='https://support.coingecko.com/hc/en-us' target='_blank' rel="noopener noreferrer">Help</a>
+              <a href='https://www.coingecko.com/en/faq' target='_blank' rel="noopener noreferrer">FAQs</a>
             </span>
           </div>
 
@@ -602,9 +602,9 @@ const MainPage = () => {
           <div className='col'>
             <h5 className='bold border-b w-[95px] border-accent'>Developers</h5>
             <span className='bar flex flex-col'>
-              <a href='https://www.coingecko.com/en/news' target='_blank'>News</a>
-              <a href='https://www.coingecko.com/en/cryptocurrency-heatmap' target='_blank'>Heatmaps</a>
-              <a href='https://www.coingecko.com/en/api' target='_blank'>API</a>
+              <a href='https://www.coingecko.com/en/news' target='_blank' rel="noopener noreferrer">News</a>
+              <a href='https://www.coingecko.com/en/cryptocurrency-heatmap' target='_blank' rel="noopener noreferrer">Heatmaps</a>
+              <a href='https://www.coingecko.com/en/api' target='_blank' rel="noopener noreferrer">API</a>
             </span>
           </div>
 
@@ -612,10 +612,10 @@ const MainPage = () => {
           <div className='col'>
             <h5 className='bold border-b w-[85px] border-accent'>Company</h5>
             <span className='bar flex flex-col'>
-              <a href='https://www.coingecko.com/en/about' target='_blank'>About</a>
-              <a href='https://blog.coingecko.com/' target='_blank'>Blog</a>
-              <a href='https://careers.coingecko.com/' target='_blank'>Careers</a>
-              <a href='https://www.coingecko.com/en/privacy' target='_blank'>Privacy</a>
+              <a href='https://www.coingecko.com/en/about' target='_blank' rel="noopener noreferrer">About</a>
+              <a href='https://blog.coingecko.com/' target='_blank' rel="noopener noreferrer">Blog</a>
+              <a href='https://careers.coingecko.com/' target='_blank' rel="noopener noreferrer">Careers</a>
+              <a href='https://www.coingecko.com/en/privacy' target='_blank' rel="noopener noreferrer">Privacy</a>
             </span>
           </div>
 
@@ -623,11 +623,11 @@ const MainPage = () => {
           <div className='col'>
             <h5 className='bold border-b w-[57px] border-accent'>Social</h5>
             <span className='bar flex flex-col'>
-              <a href='https://www.facebook.com/coingecko' target='_blank'><FaFacebook className='text-accent mb-2 ml-4'/></a>
-              <a href='https://twitter.com/coingecko' target='_blank'><FaTwitter className='text-accent mb-2 ml-4'/></a>
-              <a href='https://www.linkedin.com/company/coingecko/' target='_blank'><FaLinkedin className='text-accent mb-2 ml-4' /></a>
-              <a href='https://www.instagram.com/coingecko/' target='_blank'><FaInstagram className='text-accent mb-2 ml-4' /></a>
-              <a href="https://www.reddit.com/r/coingecko/" target='_blank'><FaReddit className='text-accent mb-2 ml-4'/></a>
+              <a href='https://www.facebook.com/coingecko' target='_blank' rel="noopener noreferrer"><FaFacebook className='text-accent mb-2 ml-4'/></a>
+              <a href='https://twitter.com/coingecko' target='_blank' rel="noopener noreferrer"><FaTwitter className='text-accent mb-2 ml-4'/></a>
+              <a href='https://www.linkedin.com/company/coingecko/' target='_blank' rel="noopener noreferrer"><FaLinkedin className='text-accent mb-2 ml-4' /></a>
+              <a href='https://www.instagram.com/coingecko/' target='_blank' rel="noopener noreferrer"><FaInstagram className='text-accent mb-2 ml-4' /></a>
+              <a href="https://www.reddit.com/r/coingecko/" target='_blank' rel="noopener noreferrer"><FaReddit className='text-accent mb-2 ml-4'/></a>
             </span>
           </div>
 
