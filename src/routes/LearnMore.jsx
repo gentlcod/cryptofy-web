@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect } from 'react';
 import FarCaster from '../assets/farcasterframe.png'
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -8,6 +9,13 @@ import Navbar from '../components/Navbar';
 
 
 const LearnMore = () => {
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page when the component mounts
+  }, []);
+
+
   return (
     <> 
     <Navbar />   

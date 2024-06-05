@@ -21,7 +21,7 @@ const Footer = () => {
                 <div className='ml-12'>
                     <h2 className='font-bold mb-7'>Info</h2>
                     <ul>
-                       <a href="https://www.coingecko.com/en/about" target='_blank'><li className='text-sm py-2'>About Us</li></a>
+                       <a href="https://www.coingecko.com/en/about" target='_blank'><li className='text-sm  py-2'>About Us</li></a>
                        <a href="https://www.coingecko.com/learn/5-things-to-invest-in-during-the-downturn" target='_blank'><li className='text-sm py-2'>Invest</li></a>
                        <a href="https://www.coingecko.com/research/publications/crypto-legal-countries" target='_blank'><li className='text-sm py-2'>Legal</li></a>
                     </ul>
@@ -38,12 +38,13 @@ const Footer = () => {
                          <p className='text-center md:text-right'>Sign up for crypto news</p>
                          <div className='py-4'>
                             <form>
-                                <input className='bg-primary border border-input p-2 mr-2 w-full
+                                <input className='bg-primary border mr-2 border-input p-2 w-full
                                 shadow-xl rounded-2xl md:w-auto'
                                  type="email" placeholder='Enter Your Email' />
+                                 
                                 <Link to='/signup'
                                 className='bg-button text-btnText cursor-pointer
-                                p-2 px-4 w-full rounded-2xl shadow-xl 
+                                p-2 px-4 w-full rounded-2xl shadow-xl mt-7
                                 hover:shadow-2xl md:w-auto my-2'>
                                     Sign Up</Link>
                             </form>

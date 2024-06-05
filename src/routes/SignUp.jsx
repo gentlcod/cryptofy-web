@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaRegUser, FaArrowLeft } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { UserAuth } from '../context/AuthContext'; // Corrected import
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -32,6 +31,11 @@ const SignUp = () => {
       console.log(e.message);
     }
   };
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page when the component mounts
+  }, []);
 
   return (
     <div>
@@ -78,7 +82,7 @@ const SignUp = () => {
                 className="absolute right-10 top-3 text-gray-400"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <IoEyeOff /> : <IoEye />}
+                {showPassword ? <IoEye /> : <IoEyeOff /> }
               </button>
             </div>
           </div>
@@ -98,7 +102,7 @@ const SignUp = () => {
                 className="absolute right-10 top-3 text-gray-400"
                 onClick={() => setShowRepeatPassword(!showRepeatPassword)}
               >
-                {showRepeatPassword ? <IoEyeOff /> : <IoEye />}
+                {showRepeatPassword ? <IoEye /> : <IoEyeOff /> }
               </button>
             </div>
           </div>
@@ -121,7 +125,6 @@ const SignUp = () => {
       <a href="/">
         <p className='lg:hidden max-sm:mt-[-1.7rem] max-sm:ml-[1.5rem] md:pl-[7.7rem]'><FaArrowLeft />Back</p>
       </a>
-      <Footer />
     </div>
   );
 };

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 import { IoEye } from "react-icons/io5";
 import { BiSolidHide } from "react-icons/bi";
 import { UserAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { FaArrowLeft } from 'react-icons/fa';
 
 const SignIn = ({ coins }) => {
@@ -27,6 +26,10 @@ const SignIn = ({ coins }) => {
       console.log(e.message);
     }
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page when the component mounts
+  }, []);
 
   return (
     <div>
@@ -83,7 +86,6 @@ const SignIn = ({ coins }) => {
     </a>
 
 
-    <Footer />
     </div>
   );
 }
