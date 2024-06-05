@@ -44,7 +44,7 @@ const Footer = () => {
                                  
                                 <Link to='/signup'
                                 className='bg-button text-btnText cursor-pointer
-                                p-2 px-4 w-full rounded-2xl shadow-xl mt-7
+                                p-2 px-4 w-full rounded-2xl shadow-xl
                                 hover:shadow-2xl md:w-auto my-2'>
                                     Sign Up</Link>
                             </form>
