@@ -1,3 +1,4 @@
+// SavedCoin.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -8,31 +9,44 @@ import { UserAuth } from '../context/AuthContext';
 const SavedCoin = () => {
   const [coins, setCoins] = useState([]);
   const { user } = UserAuth();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user?.email) {
-      const unsubscribe = onSnapshot(doc(db, 'users', `${user.email}`), (doc) => {
-        setCoins(doc.data()?.watchList || []);
+    if (user?.uid) {
+      const unsubscribe = onSnapshot(doc(db, 'users', user.uid), (doc) => {
+        if (doc.exists()) {
+          const watchList = doc.data()?.watchList || [];
+          setCoins(watchList);
+          console.log("WatchList: ", watchList); // Log watchList to verify data retrieval
+        } else {
+          console.log("No such document!");
+          setCoins([]); // Set an empty array if document doesn't exist
+        }
+        setLoading(false);
+      }, (error) => {
+        console.error("Error fetching document: ", error);
+        setLoading(false);
       });
-
+  
       return () => unsubscribe();
     }
-  }, [user?.email]);
+  }, [user?.uid]);
 
-  const coinPath = doc(db, 'users', `${user?.email}`);
-  const deleteCoin = async (passedid) => {
+  const deleteCoin = async (passedId) => {
     try {
-      const result = coins.filter((item) => item.id !== passedid);
-      await updateDoc(coinPath, {
-        watchList: result
+      const updatedCoins = coins.filter((item) => item.id !== passedId);
+      setCoins(updatedCoins);
+
+      await updateDoc(doc(db, 'users', user.uid), {
+        watchList: updatedCoins
       });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.error('Error deleting coin: ', error);
     }
   };
 
-  if (!coins) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return <p>Loading...</p>;
   }
 
   return (
@@ -40,15 +54,9 @@ const SavedCoin = () => {
       {coins.length === 0 ? (
         <p>
           You don't have any coins saved.
-          Please save a coin to add it to watch list.
+          Please save a coin to add it to the watch list.
           <br />
-          <div className='bold my-4'>
-          <Link to='/explore'
-          className='hover:text-accent 
-                     ease-in duration-300'> 
-          Click here to search coins
-          </Link>
-          </div>
+          <Link to='/explore' className='hover:text-accent bold ease-in duration-300'>Click here to explore coins</Link>
         </p>
       ) : (
         <table className='w-full border-collapse text-center'>
@@ -62,14 +70,14 @@ const SavedCoin = () => {
           <tbody>
             {coins.map((coin) => (
               <tr key={coin.id} className='h-[60px] overflow-hidden'>
-                <td>{coin?.rank}</td>
+                <td>{coin.rank}</td>
                 <td>
                   <Link to={`/coin/${coin.id}`}>
                     <div className='flex items-center'>
-                      <img src={coin?.image} className='w-8 mr-4' alt={coin?.name} />
+                      <img src={coin.image} className='w-8 mr-4' alt={coin.name} />
                       <div>
-                        <p className='hidden sm:table-cell'>{coin?.name}</p>
-                        <p className='text-gray-500 text-left text-sm'>{coin?.symbol.toUpperCase()}</p>
+                        <p className='hidden sm:table-cell'>{coin.name}</p>
+                        <p className='text-gray-500 text-left text-sm'>{coin.symbol.toUpperCase()}</p>
                       </div>
                     </div>
                   </Link>

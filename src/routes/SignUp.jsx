@@ -3,8 +3,8 @@ import { FaRegUser, FaArrowLeft } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { UserAuth } from '../context/AuthContext'; // Corrected import
-import Navbar from '../components/Navbar';
+import { UserAuth } from '../context/AuthContext'; 
+import { FaGoogle } from "react-icons/fa";
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -15,7 +15,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const navigate = useNavigate();
-  const { signup } = UserAuth(); // Corrected usage
+  const { signUpWithGoogle, signUpWithPassword } = UserAuth(); // Access the sign up functions from the context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,14 +24,21 @@ const SignUp = () => {
       if (password !== repeatPassword) {
         throw new Error('Passwords do not match');
       }
-      await signup(email, password, name);
+      await signUpWithPassword(email, password, name);
       navigate('/account');
     } catch (e) {
       setError(e.message);
-      console.log(e.message);
     }
   };
 
+  const handleGoogleSignUp = async () => {
+    try {
+      await signUpWithGoogle();
+      navigate('/account');
+    } catch (e) {
+      console.error('Google sign up error', e.message);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top of the page when the component mounts
@@ -39,9 +46,19 @@ const SignUp = () => {
 
   return (
     <div>
-      <Navbar />
-      <div className='max-w-[400px] mx-auto min-h-[600px] px-4 py-20'>
-        <h1 className='text-2xl font-bold '>Sign Up</h1>
+      <a href="/">
+        <p className='max-sm:mt-[1.7rem] max-sm:ml-[1.5rem] md:pl-[7.7rem] lg:hidden sm:hidden'><FaArrowLeft/>Back</p>
+      </a>
+      <div className='max-w-[400px] mx-auto min-h-[600px] px-4'>
+        <img 
+          src='/logowithoutbg.png'
+          height={65}
+          width={65}
+          alt='logo'
+          className='ml-[150px] py-4'
+        />
+        <h1 className='text-2xl font-bold text-center'>Create Account</h1>
+        
         {error && <p className='bg-red-300 my-2 p-3'>{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className='my-4'>
@@ -111,8 +128,18 @@ const SignUp = () => {
           hover:shadow-2xl ease-in duration-300'>
             Sign Up
           </button>
+
+          <p className='text-center bold my-2'>Or</p>
+          <div className='border-b border-1px'></div>
+
+          <button 
+            onClick={handleGoogleSignUp} 
+            className='w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl hover:shadow-2xl ease-in duration-300'
+          >
+            Sign up with Google <FaGoogle className='ml-[161px]'/>
+          </button>
         </form>
-        <p className='my-4'>
+        <p className='my-4 text-center'>
           Already have an account?
           <Link
             to='/signin'
@@ -122,9 +149,6 @@ const SignUp = () => {
           </Link>
         </p>
       </div>
-      <a href="/">
-        <p className='lg:hidden max-sm:mt-[-1.7rem] max-sm:ml-[1.5rem] md:pl-[7.7rem]'><FaArrowLeft />Back</p>
-      </a>
     </div>
   );
 };

@@ -1,8 +1,9 @@
+// components/CoinItem.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { UserAuth } from '../context/AuthContext';
+import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { db } from '../firebase';
 import { arrayUnion, arrayRemove, doc, updateDoc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -12,8 +13,8 @@ const CoinItem = ({ coin }) => {
 
   useEffect(() => {
     const checkSavedCoin = async () => {
-      if (user?.email) {
-        const coinDoc = await getDoc(doc(db, 'users', user.email));
+      if (user?.uid) {
+        const coinDoc = await getDoc(doc(db, 'users', user.uid));
         if (coinDoc.exists()) {
           const watchList = coinDoc.data().watchList || [];
           const isSaved = watchList.some(savedCoin => savedCoin.id === coin.id);
@@ -22,12 +23,12 @@ const CoinItem = ({ coin }) => {
       }
     };
     checkSavedCoin();
-  }, [user?.email, coin.id]);
+  }, [user?.uid, coin.id]);
 
-  const coinPath = doc(db, 'users', `${user?.email}`);
+  const coinPath = doc(db, 'users', `${user?.uid}`);
 
   const saveCoin = async () => {
-    if (user?.email) {
+    if (user?.uid) {
       const coinData = {
         id: coin.id,
         name: coin.name,

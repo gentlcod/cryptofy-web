@@ -32,29 +32,27 @@ const Footer = () => {
                 <div className='w-full justify-end'>
                     <div className='w-full md:max-w-[300px] py-4 relative'>
                         <div className='flex justify-center md:justify-end py-4 
-                        md:py-0 md:pb-4 mt-[-1rem]'>
-                            <ThemeToggle />
+                        md:py-0 md:pb-4 mt-[-1rem] lg:mr-[10rem]'>
+                            <p className='mt-2 mr-2'>Theme :</p> <ThemeToggle /> 
                          </div>
-                         <p className='text-center md:text-right'>Sign up for crypto news</p>
-                         <div className='py-4'>
-                            <form>
-                                <input className='bg-primary border mr-2 border-input p-2 w-full
-                                shadow-xl rounded-2xl md:w-auto'
-                                 type="email" placeholder='Enter Your Email' />
-                                 
-                                <Link to='/signup'
-                                className='bg-button text-btnText cursor-pointer
-                                p-2 px-4 w-full rounded-2xl shadow-xl
-                                hover:shadow-2xl md:w-auto my-2'>
-                                    Sign Up</Link>
-                            </form>
+
+                         <div className='lg:ml-9'>  
+                      <a href="https://www.coingecko.com/en/news" target='_blank' rel="noopener noreferrer">
+                         <p className='text-center md:text-right uppercase bg-button text-btnText cursor-pointer
+                          px-9 bold py-2 lg:w-[200px] rounded-2xl shadow-lg'>
+                            Crypto News
+                            </p>
+                         </a>
+
                          </div>
-                         <div className='flex py-4 justify-between text-accent'>
-                       <a href='https://twitter.com/coingecko' target='_blank' rel="noopener noreferrer">  <FaTwitter /> </a>
-                       <a href="https://www.linkedin.com/company/coingecko/" target='_blank' rel="noopener noreferrer">  <FaLinkedin /> </a>
-                       <a href='https://www.facebook.com/coingecko' target='_blank' rel="noopener noreferrer">  <FaFacebookF /> </a>
-                       <a href="https://www.reddit.com/r/coingecko/" target='_blank' rel="noopener noreferrer"><FaReddit /></a>
-                       <a href='https://www.instagram.com/coingecko/' target='_blank' rel="noopener noreferrer">  <AiOutlineInstagram/> </a>
+                         
+                         <br />
+                         <div className='flex py-4 text-accent lg:pl-3 pl-7'>
+                       <a href='https://twitter.com/coingecko' className='px-[27px]' target='_blank' rel="noopener noreferrer">  <FaTwitter /> </a>
+                       <a href="https://www.linkedin.com/company/coingecko/" className='px-[27px]' target='_blank' rel="noopener noreferrer">  <FaLinkedin /> </a>
+                       <a href='https://www.facebook.com/coingecko' className='px-[27px]' target='_blank' rel="noopener noreferrer">  <FaFacebookF /> </a>
+                       <a href="https://www.reddit.com/r/coingecko/" className='px-[27px]' target='_blank' rel="noopener noreferrer"><FaReddit /></a>
+                       <a href='https://www.instagram.com/coingecko/' className='px-[27px]' target='_blank' rel="noopener noreferrer">  <AiOutlineInstagram/> </a>
                          </div>
                       </div>
                 </div>

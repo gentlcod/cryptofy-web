@@ -14,11 +14,7 @@ const Preloader = () => {
     return () => clearTimeout(timeout);
   }, [location.pathname]); // Re-run effect whenever location pathname changes
 
-  // Exclude SignIn and SignUp pages from preloader
-  const excludePaths = ['/signin', '/signup'];
-  if (excludePaths.includes(location.pathname.toLowerCase())) {
-    return null;
-  }
+
 
   return loading ? <div id="preloader"></div> : null;
 };

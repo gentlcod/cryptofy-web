@@ -57,11 +57,15 @@ const Navbar = () => {
         isSticky ? 'sticky top-0 shadow-xl bg-white z-10' : ''
       }`}
     >
-      <Link to='/' onClick={handleMenuItemClick}>
-        <p>
-          <span className='bold text-3xl text-accent'>C</span>
-          <span className='text-accent'>fy</span>
-        </p>
+      <Link to='/' onClick={handleMenuItemClick} className='flex items-center'>
+      <img
+          src='/logowithoutbg.png'
+          alt='logo'
+          height={75}
+          width={75}
+         
+        />
+        <span className='text-accent font-bold uppercase ml-[-15px] text-4xl'>fy</span>
       </Link>
 
 

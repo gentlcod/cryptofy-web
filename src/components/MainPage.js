@@ -1,12 +1,12 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { Link, animateScroll as scroll } from 'react-scroll';
+import { Link } from 'react-scroll';
 import { UserAuth } from '../context/AuthContext';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { FiArrowUpRight, FiArrowDownRight } from 'react-icons/fi';
 import ThemeToggle from './ThemeToggle';
 import Crypto from '../assets/hero-img.png';
-import BTC from '../assets/btc-img.png';
+// import BTC from '../assets/btc-img.png';
 import Trade from '../assets/trade.png';
 import axios from 'axios';
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram, FaReddit } from 'react-icons/fa';
@@ -47,6 +47,14 @@ const MainPage = () => {
 
     return verticalVisible && horizontalVisible;
   };
+
+  // Changing the text color to black when typed in inputs of contact section
+  const handleInputFocus = (event) => {
+    event.target.style.color = 'black'; 
+  };
+
+
+  
 
   const handleScroll = () => {
     const sections = document.querySelectorAll("section");
@@ -96,181 +104,170 @@ const MainPage = () => {
   return (
     <>
       {/* Navbar */}
-      <div
-        className={`rounded-divnav flex items-center justify-between h-20 font-bold ${shadow ? 'shadow-lg' : ''} ${isSticky ? 'sticky top-0 bg-white z-10' : ''}`}
+      <div className={`rounded-divnav flex items-center justify-between h-20 font-bold ${shadow ? 'shadow-lg' : ''} ${isSticky ? 'sticky top-0 bg-white z-10' : ''}`}>
+      {/* Logo and Text */}
+      <Link 
+        to="home"
+        smooth={true}
+        duration={100}
+        onClick={() => handleMenuItemClick('home')}
+        className='flex items-center cursor-pointer'
       >
-        <a href='/' onClick={() => handleMenuItemClick('home')}>
-          <p className='xl:pl-[145px]'>
-            <span className='text-5xl text-accent'>C</span>
-            <span className='text-accent text-4xl'>fy</span>
-          </p>
-        </a>
+        <img
+          src='/logowithoutbg.png'
+          alt='logo'
+          height={75}
+          width={75}
+          className='lg:ml-[135px] md:ml-[5px] sm:ml-[1px]'
+        />
+        <span className='text-accent font-bold uppercase ml-[-15px] text-4xl'>fy</span>
+      </Link>
 
-        <ul className='flex items-center justify-between'>
-          <li>
+      {/* Main Navigation Links */}
+      <ul className='flex items-center justify-between'>
+        <li>
+          <Link
+            to="home"
+            smooth={true}
+            duration={100}
+            className='nav-link hidden lg:block lg:px-[90px] cursor-pointer hover:text-accent ease-in duration-300'
+            onClick={() => handleMenuItemClick('home')}
+          >
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="explore"
+            smooth={true}
+            duration={100}
+            className='nav-link hidden lg:block lg:px-[90px] cursor-pointer hover:text-accent ease-in duration-300'
+            onClick={() => handleMenuItemClick('explore')}
+          >
+            Explore
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="contact"
+            smooth={true}
+            duration={100}
+            className='nav-link hidden lg:block lg:px-[90px] cursor-pointer hover:text-accent ease-in duration-300'
+            onClick={() => handleMenuItemClick('contact')}
+          >
+            Contact
+          </Link>
+        </li>
+      </ul>
+
+      {/* Theme Toggle */}
+      <div className='hidden lg:block'>
+        <ThemeToggle />
+      </div>
+
+      {/* Conditional Rendering for User Authentication */}
+      {user?.email ? (
+        <div className='hidden lg:block xl:mr-[150px]'>
+          <button onClick={() => navigate('/account')} className='pr-12 hover:text-accent ease-in duration-300'>
+            Account
+          </button>
+          <button onClick={handleSignOut} className='hover:text-accent ease-in duration-300'>
+            Sign Out
+          </button>
+        </div>
+      ) : (
+        <div className='hidden lg:block xl:mr-[150px]'>
+          <button
+            className={`p-4 ${activeNavLink === 'signin' ? 'text-accent' : 'hover:text-accent'} ease-in duration-300 cursor-pointer`}
+            onClick={() => {
+              navigate('/signin');
+              handleMenuItemClick('signin');
+            }}
+          >
+            Sign In
+          </button>
+          <button
+            className={`bg-button text-btnText cursor-pointer px-5 py-2 ml-2 rounded-2xl shadow-lg ${activeNavLink === 'signup' ? 'text-accent' : 'hover:shadow-2xl'} ease-in duration-300`}
+            onClick={() => {
+              navigate('/signup');
+              handleMenuItemClick('signup');
+            }}
+          >
+            Sign Up
+          </button>
+        </div>
+      )}
+
+      {/* Mobile Menu Icon */}
+      <div onClick={handleNav} className='block lg:hidden cursor-pointer'>
+        {navOpen ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
+      </div>
+
+      {/* Mobile Navigation Menu */}
+      <div className={`${navOpen ? 'lg:hidden fixed left-0 top-20 flex flex-col items-center justify-between w-full h-[93%] bg-primary ease-in duration-300 z-10' : 'fixed left-[-100%] top-20 h-[93%] flex flex-col items-center justify-between ease-in duration-300'}`}>
+        <ul className='w-full p-4'>
+          <li className='border-b border-gray-400 py-6'>
             <Link
-              to="home"
+              to='home'
               smooth={true}
               duration={100}
-              className='nav-link hidden lg:block lg:px-[90px] cursor-pointer hover:text-accent ease-in duration-300'
+              className={`nav-link hover:text-accent lg:px-[90px] cursor-pointer ${activeNavLink === 'home' ? 'text-accent' : 'hover:text-accent'}`}
               onClick={() => handleMenuItemClick('home')}
             >
               Home
-
-       
             </Link>
-           
           </li>
-          <li>
+          <li className='border-b border-gray-400 py-6'>
             <Link
               to="explore"
               smooth={true}
               duration={100}
-              className='nav-link hidden lg:block lg:px-[90px] cursor-pointer hover:text-accent ease-in duration-300'
+              className={`nav-link hover:text-accent lg:px-[90px] cursor-pointer ${activeNavLink === 'explore' ? 'text-accent' : 'hover:text-accent'}`}
               onClick={() => handleMenuItemClick('explore')}
             >
               Explore
             </Link>
           </li>
-          <li>
+          <li className='border-b border-gray-400 py-6'>
             <Link
               to="contact"
               smooth={true}
               duration={100}
-              className='nav-link hidden lg:block lg:px-[90px] cursor-pointer hover:text-accent ease-in duration-300'
+              className={`nav-link hover:text-accent lg:px-[90px] cursor-pointer ${activeNavLink === 'contact' ? 'text-accent' : 'hover:text-accent'}`}
               onClick={() => handleMenuItemClick('contact')}
             >
               Contact
             </Link>
           </li>
+          <li>
+            <ThemeToggle />
+          </li>
         </ul>
 
-        <div className='hidden lg:block'>
-          <ThemeToggle />
-        </div>
-
-        {user?.email ? (
-          <div className='hidden lg:block xl:mr-[150px]'>
-            <button onClick={() => navigate('/account')}
-             className='pr-12 hover:text-accent ease-in duration-300'>
-              Account
-            </button>
-
-            <button onClick={handleSignOut}
-            className='hover:text-accent ease-in duration-300'>
-              Sign Out
-            </button>
-          </div>
-        ) : (
-          <div className='hidden lg:block xl:mr-[150px]'>
-            <button
-              className={`p-4 ${activeNavLink === 'signin' ? 'text-accent' : 'hover:text-accent'} ease-in duration-300 cursor-pointer`}
-              onClick={() => {
-                navigate('/signin');
-                handleMenuItemClick('signin');
-              }}
-            >
-              Sign In
-            </button>
-            <button
-              className={`bg-button text-btnText cursor-pointer px-5 py-2 ml-2 rounded-2xl shadow-lg ${activeNavLink === 'signup' ? 'text-accent' : 'hover:shadow-2xl'} ease-in duration-300`}
-              onClick={() => {
-                navigate('/signup');
-                handleMenuItemClick('signup');
-              }}
-            >
-              Sign Up
-            </button>
-          </div>
-        )}
-
-        {/* MENU ICON */}
-        <div onClick={handleNav} className='block lg:hidden cursor-pointer'>
-          {navOpen ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
-        </div>
-
-        <div
-          className={`${navOpen ? 'lg:hidden fixed left-0 top-20 flex flex-col items-center justify-between w-full h-[93%] bg-primary ease-in duration-300 z-10' : 'fixed left-[-100%] top-20 h-[93%] flex flex-col items-center justify-between ease-in duration-300'}`}
-        >
-          <ul className='w-full p-4'>
-            <li className='border-b border-gray-400 py-6'>
-              <Link
-                to='home'
-                smooth={true}
-                duration={100}
-                className={`nav-link hover:text-accent lg:px-[90px] cursor-pointer ${activeNavLink === 'home' ? 'text-accent' : 'hover:text-accent'}`}
-                onClick={() => handleMenuItemClick('home')}
-              >
-                Home
-              </Link>
-            </li>
-            <li className='border-b border-gray-400 py-6'>
-              <Link
-                to="explore"
-                smooth={true}
-                duration={100}
-                className={`nav-link hover:text-accent lg:px-[90px] cursor-pointer ${activeNavLink === 'explore' ? 'text-accent' : 'hover:text-accent'}`}
-                onClick={() => handleMenuItemClick('explore')}
-              >
-                Explore
-              </Link>
-            </li>
-            <li className='border-b border-gray-400 py-6'>
-              <Link
-                to="contact"
-                smooth={true}
-                duration={100}
-                className={`nav-link hover:text-accent lg:px-[90px] cursor-pointer ${activeNavLink === 'contact' ? 'text-accent' : 'hover:text-accent'}`}
-                onClick={() => handleMenuItemClick('contact')}
-              >
-                Contact
-              </Link>
-            </li>
-            <li>
-              <ThemeToggle />
-            </li>
-          </ul>
-
-
-
+        {/* Mobile Authentication Buttons */}
+        <div className='flex flex-col w-full p-4'>
           {user?.email ? (
-          <div className='flex flex-col w-full p-4'>
-            <button onClick={() => navigate('/account')}
-              className='w-full my-2 p-3 border bg-primary text-primary border-secondary rounded-2xl shadow-xl hover:border-accent hover:text-accent ease-in duration-300'>
-              Account
-            </button>
-
-            <button onClick={handleSignOut}
-              className='w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl hover:shadow-2xl ease-in duration-300'>
-              Sign Out
-            </button>
-          </div>
-        ) : (
-
-          <div className='flex flex-col w-full p-4'>
-            <button
-              className='w-full my-2 p-3 border bg-primary text-primary border-secondary rounded-2xl shadow-xl hover:border-accent hover:text-accent ease-in duration-300'
-              onClick={() => {
-                navigate('/signin');
-                handleMenuItemClick('signin');
-              }}
-            >
-              Sign In
-            </button>
-
-            <button
-              className='w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl hover:shadow-2xl ease-in duration-300'
-              onClick={() => {
-                navigate('/signup');
-                handleMenuItemClick('signup');
-              }}
-            >
-              Sign Up
-            </button>
-          </div>
-        )}
+            <>
+              <button onClick={() => navigate('/account')} className='w-full my-2 p-3 border bg-primary text-primary border-secondary rounded-2xl shadow-xl hover:border-accent hover:text-accent ease-in duration-300'>
+                Account
+              </button>
+              <button onClick={handleSignOut} className='w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl hover:shadow-2xl ease-in duration-300'>
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <button className='w-full my-2 p-3 border bg-primary text-primary border-secondary rounded-2xl shadow-xl hover:border-accent hover:text-accent ease-in duration-300' onClick={() => { navigate('/signin'); handleMenuItemClick('signin'); }}>
+                Sign In
+              </button>
+              <button className='w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl hover:shadow-2xl ease-in duration-300' onClick={() => { navigate('/signup'); handleMenuItemClick('signup'); }}>
+                Sign Up
+              </button>
+            </>
+          )}
         </div>
       </div>
+    </div>
     
 
 
@@ -533,8 +530,7 @@ const MainPage = () => {
             <div className='left'>
                 <img 
                 src={Trade} 
-               
-                alt='/'
+                alt='Trade Image'
                 />
 
             </div>
@@ -550,10 +546,16 @@ const MainPage = () => {
                   <br /> 30+ digital assets
                     </h2>
                 <h5 className='mb-6'>Contact us for more info</h5>
-                <div className='input-container'>
-                <input type='text' className='name' placeholder='Enter your name' />
-                    <input className='email' type='email' placeholder='Enter your email' />
-                    <textarea rows={7} cols={50} placeholder='Enter your query'></textarea>
+                <div className='input-container text-primary'>
+                <input type='text' className='name' onFocus={handleInputFocus} placeholder='Enter your name' />
+                <input  type='email' className='email' onFocus={handleInputFocus}  placeholder='Enter your email' />
+                    <textarea
+                      rows={7}
+                      cols={50}
+                      placeholder='Enter your query'
+                      className='query-input' 
+                      onFocus={handleInputFocus} 
+                    ></textarea>
                     <button className='btn bg-button text-btnText px-5 py-2 ml-2'>Send Message</button>
 
                 </div>
@@ -571,23 +573,27 @@ const MainPage = () => {
     {/* FOOTER  */}
 
 
-    <section id='footer' className='rounded-divfooter'>
+    <section id='footer' className='rounded-div'>
       <div className='footer'>
         <div className='container'>
           <div className='col col-1'>
-          <Link 
-               to="home"
-               smooth={true}
-               duration={100}
-               onClick={() => handleMenuItemClick('/home')}
-               className='bold cursor-pointer'>
-          <p>
-            <span className='bold-2 text-5xl uppercase text-accent'>C</span>
-            <span className='bold-2 text-accent lowercase text-5xl'>fy</span>
-          </p>
-        </Link>
-          </div>
+          {/* <Link 
+        to="home"
+        smooth={true}
+        duration={100}
+        onClick={() => handleMenuItemClick('home')}
+        className='flex items-center cursor-pointer'
+      >
+        <img
+          src='/logowithoutbg.png'
+          alt='logo'
+          height={75}
+          width={75}
 
+        />
+        <span className='text-accent font-bold uppercase ml-[-15px] text-4xl'>fy</span>
+      </Link> */}
+          </div>
           <div className='col'>
             <h5 className='bold border-b w-[70px] border-accent'>Support</h5>
             <span className='bar flex flex-col'>
@@ -623,7 +629,7 @@ const MainPage = () => {
           <div className='col'>
             <h5 className='bold border-b w-[57px] border-accent'>Social</h5>
             <span className='bar flex flex-col'>
-              <a href='https://www.facebook.com/coingecko' target='_blank' rel="noopener noreferrer"><FaFacebook className='hover:text-accent duration-300 ease-in-out mb-3 ml-4'/></a>
+              {/* <a href='https://www.facebook.com/coingecko' target='_blank' rel="noopener noreferrer"><FaFacebook className='hover:text-accent duration-300 ease-in-out mb-3 ml-4'/></a> */}
               <a href='https://twitter.com/coingecko' target='_blank' rel="noopener noreferrer"><FaTwitter className='hover:text-accent duration-300 ease-in-out mb-3 ml-4'/></a>
               <a href='https://www.linkedin.com/company/coingecko/' target='_blank' rel="noopener noreferrer"><FaLinkedin className='hover:text-accent duration-300 ease-in-out mb-3 ml-4' /></a>
               <a href='https://www.instagram.com/coingecko/' target='_blank' rel="noopener noreferrer"><FaInstagram className='hover:text-accent duration-300 ease-in-out mb-3 ml-4' /></a>

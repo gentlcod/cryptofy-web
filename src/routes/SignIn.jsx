@@ -1,44 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { UserAuth } from '../context/AuthContext'; // Import UserAuth from context
+import { FaArrowLeft } from 'react-icons/fa';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 import { IoEye } from "react-icons/io5";
 import { BiSolidHide } from "react-icons/bi";
-import { UserAuth } from '../context/AuthContext';
-import Navbar from '../components/Navbar';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaGoogle } from "react-icons/fa";
 
-const SignIn = ({ coins }) => {
-  const { signin } = UserAuth(); // Access the signin function from the context
+const SignIn = () => {
+  const { signin, signInWithGoogle } = UserAuth(); // Access the auth functions from the context
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false); 
 
-  const handleSubmit = async function(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError(''); // Reset error state before attempting sign-in
     try {
       await signin(email, password); // Call signin function from the context
       navigate('/account');
-    } catch (e) {
-      setError(e.message);
-      console.log(e.message);
+    } catch (error) {
+      setError(error.message); // Update error state with the correct error message
+      console.error('Error signing in:', error); // Log the error to console for debugging
     }
-  }
+  };
 
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top of the page when the component mounts
-  }, []);
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      navigate('/account');
+    } catch (error) {
+      console.error('Error signing in with Google:', error);
+    }
+  };
 
   return (
     <div>
-     
-        <Navbar />
+      <a href="/">
+        <p className='max-sm:mt-[1.7rem] max-sm:ml-[1.5rem] md:pl-[7.7rem] lg:hidden sm:hidden'><FaArrowLeft/>Back</p>
+      </a>
 
       {/* Main content */}
-      <div className='max-w-[400px] mx-auto min-h-[600px] px-4 py-20'>
-        <h1 className='text-2xl font-bold'>Sign In</h1>
+      <div className='max-w-[400px] mx-auto min-h-[600px] px-4 py-7'>
+        <img 
+          src='/logowithoutbg.png'
+          height={65}
+          width={65}
+          alt='logo'
+          className='ml-[150px] py-4'
+        />
+        <br />
+        <br />
+        <br />
+
+        <h1 className='text-2xl text-center font-bold'>Welcome Back</h1>
+
         <form onSubmit={handleSubmit}>
           <div className='my-4'>
             <label>Email</label>
@@ -65,29 +83,35 @@ const SignIn = ({ coins }) => {
                 className="absolute right-10 top-3 text-gray-400"
                 onClick={() => setShowPassword(!showPassword)} // Toggle showPassword state
               >
-                {showPassword ? <IoEye /> : <BiSolidHide />} {/* Change button text based on showPassword state */}
+                {showPassword ? <IoEye /> : <BiSolidHide />} {/* Change button icon based on showPassword state */}
               </button>
             </div>
           </div>
 
           <button className='w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl hover:shadow-2xl ease-in duration-300'>
-            Sign In
+            Sign in
           </button>
+
+          {error && <p className="text-red-500 text-center my-4">{error}</p>} {/* Display error message if there's an error */}
         </form>
 
-        <p className='my-4'>
+        <p className='text-center bold my-2'>Or</p>
+        <div className='border-b border-1px'></div>
+
+        <button 
+          onClick={handleGoogleSignIn} 
+          className='w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl hover:shadow-2xl ease-in duration-300'
+        >
+          Sign in with Google <FaGoogle className='ml-[161px]'/>
+        </button>
+
+        <p className='my-4 text-center'>
           Don't have an account? 
           <Link to='/signup' className='text-accent ml-2'> Sign Up </Link>
         </p>
       </div>
-
-      <a href="/">
-    <p className='max-sm:mt-[-1.7rem] max-sm:ml-[1.5rem] md:pl-[7.7rem] lg:hidden'><FaArrowLeft/>Back</p>
-    </a>
-
-
     </div>
   );
-}
+};
 
 export default SignIn;

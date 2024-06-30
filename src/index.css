@@ -107,7 +107,7 @@
 }
 
 .dark {
- --color-bg-primary: #1f2530;
+ --color-bg-primary: #252d37;
  --color-bg-secondary: #242d3c;
  --color-text-primary: #dbdbdb;
  --color-text-secondary: #e2e8f0;
@@ -376,7 +376,7 @@ code{
 
 #explore{
   width: 100%;
-  padding: 8rem 0;
+  padding: 3.5rem 0;
   /* clip-path: polygon(0 0, 100% 10%, 100% 100%, 0% 90%); */
 }
 
@@ -532,7 +532,7 @@ code{
 #contact img{
   width: 375px;
   transition: .5s ease-in-out;
-  margin-left: -3rem;
+  margin-left: -2.7rem;
 }
 
 #contact img:hover{
