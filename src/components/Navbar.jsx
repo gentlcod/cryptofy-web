@@ -5,7 +5,7 @@ import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import {UserAuth} from '../context/AuthContext'
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [setIsMenuOpen] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const {user, logout} = UserAuth()
   const navigate = useNavigate()

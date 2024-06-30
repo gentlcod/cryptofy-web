@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { auth, googleProvider, githubProvider, db } from '../firebase'; // Import firebase elements
+import { auth, googleProvider, db } from '../firebase'; // Import firebase elements
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from 'firebase/auth'; // Import Firebase auth methods
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { signInWithPopup } from 'firebase/auth'; // Import signInWithPopup from Firebase auth
