@@ -84,7 +84,7 @@ const SignUp = () => {
             </div>
           </div>
           <div className='my-4'>
-            <label>Password</label>
+            <label>Create Password</label>
             <div className='my-2 w-full relative rounded-2xl shadow-xl'>
               <input
                 onChange={(e) => setPassword(e.target.value)}

@@ -1,8 +1,22 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { auth, googleProvider, db } from '../firebase'; // Import firebase elements
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from 'firebase/auth'; // Import Firebase auth methods
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { signInWithPopup } from 'firebase/auth'; // Import signInWithPopup from Firebase auth
+import { 
+  auth, 
+  googleProvider, 
+  db 
+} from '../firebase'; 
+import { 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  onAuthStateChanged, 
+  signOut, 
+  updateProfile, 
+  signInWithPopup 
+} from 'firebase/auth'; 
+import { 
+  doc, 
+  getDoc, 
+  setDoc 
+} from 'firebase/firestore';
 
 const AuthContext = createContext();
 
@@ -21,9 +35,7 @@ export const AuthProvider = ({ children }) => {
   const signUpWithPassword = async (email, password, displayName) => {
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(auth.currentUser, {
-        displayName: displayName,
-      });
+      await updateProfile(auth.currentUser, { displayName });
       const userDocRef = doc(db, 'users', result.user.email);
       const userDoc = await getDoc(userDocRef);
       if (!userDoc.exists()) {
@@ -91,7 +103,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, signin, signInWithGoogle, signUpWithGoogle, signUpWithPassword, logout }}
+      value={{
+        user,
+        loading,
+        signin,
+        signInWithGoogle,
+        signUpWithGoogle,
+        signUpWithPassword,
+        logout
+      }}
     >
       {children}
     </AuthContext.Provider>
