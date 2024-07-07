@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { UserAuth } from '../context/AuthContext'; 
-import { FaGoogle } from "react-icons/fa";
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -15,7 +14,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const navigate = useNavigate();
-  const { signUpWithGoogle, signUpWithPassword } = UserAuth(); // Access the sign up functions from the context
+  const { signUpWithPassword } = UserAuth(); // Access the sign up functions from the context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,14 +30,6 @@ const SignUp = () => {
     }
   };
 
-  const handleGoogleSignUp = async () => {
-    try {
-      await signUpWithGoogle();
-      navigate('/account');
-    } catch (e) {
-      console.error('Google sign up error', e.message);
-    }
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top of the page when the component mounts
@@ -132,12 +123,6 @@ const SignUp = () => {
           <p className='text-center bold my-2'>Or</p>
           <div className='border-b border-1px'></div>
 
-          <button 
-            onClick={handleGoogleSignUp} 
-            className='w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl hover:shadow-2xl ease-in duration-300'
-          >
-            Sign up with Google <FaGoogle className='ml-[161px]'/>
-          </button>
         </form>
         <p className='my-4 text-center'>
           Already have an account?

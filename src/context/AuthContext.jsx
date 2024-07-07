@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { 
   auth, 
-  googleProvider, 
   db 
 } from '../firebase'; 
 import { 
@@ -9,8 +8,7 @@ import {
   createUserWithEmailAndPassword, 
   onAuthStateChanged, 
   signOut, 
-  updateProfile, 
-  signInWithPopup 
+  updateProfile,  
 } from 'firebase/auth'; 
 import { 
   doc, 
@@ -62,35 +60,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signUpWithGoogle = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const userDocRef = doc(db, 'users', result.user.email);
-      const userDoc = await getDoc(userDocRef);
-      if (!userDoc.exists()) {
-        await setDoc(userDocRef, {
-          email: result.user.email,
-          displayName: result.user.displayName,
-          provider: 'google',
-          watchList: [],
-        });
-      }
-    } catch (error) {
-      console.error('Error signing up with Google', error);
-      throw error;
-    }
-  };
-
-  const signInWithGoogle = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      setUser(result.user);
-    } catch (error) {
-      console.error('Error signing in with Google', error);
-      throw error;
-    }
-  };
-
   const logout = async () => {
     try {
       await signOut(auth);
@@ -107,8 +76,6 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         signin,
-        signInWithGoogle,
-        signUpWithGoogle,
         signUpWithPassword,
         logout
       }}

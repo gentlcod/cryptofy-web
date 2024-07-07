@@ -5,10 +5,9 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 import { IoEye } from "react-icons/io5";
 import { BiSolidHide } from "react-icons/bi";
-import { FaGoogle } from "react-icons/fa";
 
 const SignIn = () => {
-  const { signin, signInWithGoogle } = UserAuth(); // Access the auth functions from the context
+  const { signin } = UserAuth(); // Access the auth functions from the context
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -27,14 +26,7 @@ const SignIn = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-      navigate('/account');
-    } catch (error) {
-      console.error('Error signing in with Google:', error);
-    }
-  };
+
 
   return (
     <div>
@@ -98,16 +90,11 @@ const SignIn = () => {
         <p className='text-center bold my-2'>Or</p>
         <div className='border-b border-1px'></div>
 
-        <button 
-          onClick={handleGoogleSignIn} 
-          className='w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl hover:shadow-2xl ease-in duration-300'
-        >
-          Sign in with Google <FaGoogle className='ml-[161px]'/>
-        </button>
+      
 
         <p className='my-4 text-center'>
-          Don't have an account? 
-          <Link to='/signup' className='text-accent ml-2'> Sign Up </Link>
+          New here ? 
+          <Link to='/signup' className='text-accent ml-2'> Sign up </Link>
         </p>
       </div>
     </div>
